@@ -30,7 +30,15 @@ class _LoginState extends State<Login> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
+              const SizedBox(height: 10,),
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: 'Email atau Nomor HP',
+                  prefixIcon: Icon(Icons.person),
+                  filled: true,
+                  fillColor: Colors.white
+                ),
+              )
             ],
           )
         ),
