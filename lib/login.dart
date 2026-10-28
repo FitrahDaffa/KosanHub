@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/daftar.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -17,11 +18,7 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-              const Icon(
-                Icons.home_rounded,
-                size: 110,
-                color: Colors.white,
-              ),
+              const Icon(Icons.home_rounded, size: 110, color: Colors.white),
               const Text(
                 'KosanHub',
                 style: TextStyle(
@@ -34,10 +31,7 @@ class _LoginState extends State<Login> {
               const Text(
                 'Cari Kos  ·  Kelola Kos  ·  Hidup Lebih Mudah',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 50),
               TextField(
@@ -79,15 +73,18 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 22),
-                  ),
+                  child: const Text('Login', style: TextStyle(fontSize: 22)),
                 ),
               ),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const daftar()
+                    ),
+                  );
+                },
                 child: const Text(
                   'Belum punya akun?  Daftar',
                   style: TextStyle(color: Colors.white, fontSize: 16),
