@@ -19,42 +19,82 @@ class _LoginState extends State<Login> {
             children: [
               const Icon(
                 Icons.home_rounded,
-                size: 80,
-                color: Colors.blue
+                size: 110,
+                color: Colors.white,
               ),
               const Text(
                 'KosanHub',
                 style: TextStyle(
-                  color:Colors.white,
+                  color: Colors.white,
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 10,),
-              const TextField(
+              const SizedBox(height: 10),
+              const Text(
+                'Cari Kos  ·  Kelola Kos  ·  Hidup Lebih Mudah',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 50),
+              TextField(
                 decoration: InputDecoration(
                   hintText: 'Email atau Nomor HP',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person_outline),
                   filled: true,
-                  fillColor: Colors.white
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              const TextField(
+              TextField(
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock_outline),
                   filled: true,
-                  fillColor:Colors.white,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
-              const SizedBox(height: 300),
-              ElevatedButton(
-                onPressed: (){}, 
-                child: const Text('Login'))
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                height: 65,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF286AC4),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Belum punya akun?  Daftar',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
             ],
-          )
+          ),
         ),
       ),
     );
