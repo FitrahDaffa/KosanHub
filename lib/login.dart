@@ -38,7 +38,21 @@ class _LoginState extends State<Login> {
                   filled: true,
                   fillColor: Colors.white
                 ),
-              )
+              ),
+              const SizedBox(height: 20),
+              const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Icon(Icons.lock),
+                  filled: true,
+                  fillColor:Colors.white,
+                ),
+              ),
+              const SizedBox(height: 300),
+              ElevatedButton(
+                onPressed: (){}, 
+                child: const Text('Login'))
             ],
           )
         ),
