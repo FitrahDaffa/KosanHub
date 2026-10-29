@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/daftar.dart';
+import 'package:flutter_application_1/pemilik/dashboard.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +10,37 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void login() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email dan password harus diisi')),
+      );
+    } else if (email == 'dafa' && password == 'dafa') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Dashboard()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Dashboard()),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +61,13 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Cari Kos  ·  Kelola Kos  ·  Hidup Lebih Mudah',
+                'Cari Kos · Kelola Kos · Hidup Lebih Mudah',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 50),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: 'Email atau Nomor HP',
                   prefixIcon: const Icon(Icons.person_outline),
@@ -48,6 +81,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -65,7 +99,7 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 height: 65,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF286AC4),
                     foregroundColor: Colors.white,
@@ -81,8 +115,7 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const daftar()
-                    ),
+                    MaterialPageRoute(builder: (context) => const daftar()),
                   );
                 },
                 child: const Text(

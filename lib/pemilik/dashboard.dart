@@ -1,33 +1,15 @@
 import 'package:flutter/material.dart';
 
-class daftar extends StatefulWidget {
-  const daftar({super.key});
+class Dashboard extends StatefulWidget {
+  const new({super.key});
 
   @override
-  State<daftar> createState() => _daftarState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _daftarState extends State<daftar> {
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daftar Akun'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.home,
-              size: 80,
-              color: Colors.white,
-            ),
-          ],
-        ),
-      ),
-    );
+    return const Placeholder();
   }
 }
