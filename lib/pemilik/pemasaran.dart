@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pemilik/akun.dart';
 import 'package:flutter_application_1/pemilik/dashboard.dart';
 
 class Pemasaran extends StatelessWidget {
@@ -95,6 +96,11 @@ class Pemasaran extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Dashboard()),
+            );
+          }else if(index == 4){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Akun()),
             );
           }
         },
