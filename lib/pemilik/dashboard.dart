@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pemilik/akun.dart';
+
 import 'pemasaran.dart';
 
 class Dashboard extends StatefulWidget {
@@ -21,8 +23,8 @@ class _DashboardState extends State<Dashboard> {
         foregroundColor: Colors.white,
       ),
       body: ListView(
-              padding: const EdgeInsets.all(20),
-              children: [
+        padding: const EdgeInsets.all(20),
+        children: [
           const Text(
             'Halo, Pemilik!',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -31,16 +33,24 @@ class _DashboardState extends State<Dashboard> {
           const SizedBox(height: 20),
           const Row(
             children: [
-              Expanded(child: SummaryCard(title: 'Total Kos', value: '2')),
+              Expanded(
+                child: SummaryCard(title: 'Total Kos', value: '2'),
+              ),
               SizedBox(width: 10),
-              Expanded(child: SummaryCard(title: 'Total Kamar', value: '20')),
+              Expanded(
+                child: SummaryCard(title: 'Total Kamar', value: '20'),
+              ),
             ],
           ),
           const Row(
             children: [
-              Expanded(child: SummaryCard(title: 'Kamar Terisi', value: '15')),
+              Expanded(
+                child: SummaryCard(title: 'Kamar Terisi', value: '15'),
+              ),
               SizedBox(width: 10),
-              Expanded(child: SummaryCard(title: 'Kamar Kosong', value: '5')),
+              Expanded(
+                child: SummaryCard(title: 'Kamar Kosong', value: '5'),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -80,20 +90,21 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-              ],
-            ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const Pemasaran(),
-              ),
+              MaterialPageRoute(builder: (context) => const Pemasaran()),
             );
-          } else {
-            setState(() => selectedIndex = index);
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Akun()),
+            );
           }
         },
         destinations: const [
@@ -112,11 +123,7 @@ class SummaryCard extends StatelessWidget {
   final String title;
   final String value;
 
-  const SummaryCard({
-    super.key,
-    required this.title,
-    required this.value,
-  });
+  const SummaryCard({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,13 @@ class Pemasaran extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Pemasaran'),
+            Text(
+              'Jangkau lebih banyak calon penghuni',
+              style: TextStyle(fontSize: 12),
+              )
+          ],
         ),
       ),
     );
