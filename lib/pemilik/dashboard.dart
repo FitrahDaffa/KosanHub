@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pemasaran.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -20,8 +21,8 @@ class _DashboardState extends State<Dashboard> {
         foregroundColor: Colors.white,
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
+              padding: const EdgeInsets.all(20),
+              children: [
           const Text(
             'Halo, Pemilik!',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -54,24 +55,7 @@ class _DashboardState extends State<Dashboard> {
               trailing: Text('+12%', style: TextStyle(color: Colors.green)),
             ),
           ),
-          const SizedBox(height: 16),
-          const Text(
-            'Menu Utama',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
           const SizedBox(height: 8),
-          const Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              MenuCard(title: 'Data Kos', icon: Icons.home),
-              MenuCard(title: 'Data Kamar', icon: Icons.bed),
-              MenuCard(title: 'Penghuni', icon: Icons.people),
-              MenuCard(title: 'Pembayaran', icon: Icons.payment),
-              MenuCard(title: 'Pemasaran', icon: Icons.campaign),
-              MenuCard(title: 'Komplain', icon: Icons.chat),
-            ],
-          ),
           const SizedBox(height: 16),
           const Text(
             'Aktivitas Terbaru',
@@ -96,12 +80,21 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-        ],
-      ),
+              ],
+            ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) {
-          setState(() => selectedIndex = index);
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Pemasaran(),
+              ),
+            );
+          } else {
+            setState(() => selectedIndex = index);
+          }
         },
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
@@ -149,11 +142,13 @@ class SummaryCard extends StatelessWidget {
 class MenuCard extends StatelessWidget {
   final String title;
   final IconData icon;
+  final VoidCallback? onTap;
 
   const MenuCard({
     super.key,
     required this.title,
     required this.icon,
+    this.onTap,
   });
 
   @override
@@ -161,14 +156,18 @@ class MenuCard extends StatelessWidget {
     return SizedBox(
       width: 105,
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Icon(icon, color: Colors.blue),
-              const SizedBox(height: 6),
-              Text(title, textAlign: TextAlign.center),
-            ],
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                Icon(icon, color: Colors.blue),
+                const SizedBox(height: 6),
+                Text(title, textAlign: TextAlign.center),
+              ],
+            ),
           ),
         ),
       ),
