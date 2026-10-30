@@ -21,6 +21,28 @@ class Pemasaran extends StatelessWidget {
           ],
         ),
       ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsetsGeometry.all(16),
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'performa promosi',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    )
+                    )
+                ],
+              )
+            ),
+          )
+        ],
+      ) ,
     );
   }
 }

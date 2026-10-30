@@ -16,7 +16,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F7FF),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('KosanHub'),
         backgroundColor: Colors.blue,
@@ -105,7 +105,7 @@ class _DashboardState extends State<Dashboard> {
               context,
               MaterialPageRoute(builder: (context) => const Akun()),
             );
-          }
+          } 
         },
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
