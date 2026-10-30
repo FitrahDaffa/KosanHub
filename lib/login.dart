@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/daftar.dart';
 import 'package:flutter_application_1/pemilik/dashboard.dart';
+import 'package:flutter_application_1/pencariKosan/dashboard.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -26,10 +27,10 @@ class _LoginState extends State<Login> {
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );
-    } else {
+    } else if (email == 'rama' && password == 'rama'){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Dashboard()),
+        MaterialPageRoute(builder: (context) => const DashboardPencariKosan()),
       );
     }
   }
