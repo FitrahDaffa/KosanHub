@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pemilik/akun.dart';
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
+import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
 
-import 'pemasaran.dart';
-
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  int selectedIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PemilikScaffold(
+      selectedIndex: 0,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('KosanHub'),
@@ -31,25 +24,37 @@ class _DashboardState extends State<Dashboard> {
           ),
           const Text('Berikut ringkasan kos Anda hari ini.'),
           const SizedBox(height: 20),
-          const Row(
+          Row(
             children: [
               Expanded(
-                child: SummaryCard(title: 'Total Kos', value: '2'),
+                child: SummaryCard(
+                  title: 'Total Kos',
+                  value: '${jumlahKos()}',
+                ),
               ),
               SizedBox(width: 10),
               Expanded(
-                child: SummaryCard(title: 'Total Kamar', value: '20'),
+                child: SummaryCard(
+                  title: 'Total Kamar',
+                  value: '${jumlahKamar()}',
+                ),
               ),
             ],
           ),
-          const Row(
+          Row(
             children: [
               Expanded(
-                child: SummaryCard(title: 'Kamar Terisi', value: '15'),
+                child: SummaryCard(
+                  title: 'Kamar Terisi',
+                  value: '${jumlahKamarTerisi()}',
+                ),
               ),
               SizedBox(width: 10),
               Expanded(
-                child: SummaryCard(title: 'Kamar Kosong', value: '5'),
+                child: SummaryCard(
+                  title: 'Kamar Kosong',
+                  value: '${jumlahKamarKosong()}',
+                ),
               ),
             ],
           ),
@@ -90,29 +95,6 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (index) {
-          if (index == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Pemasaran()),
-            );
-          } else if (index == 4) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Akun()),
-            );
-          } 
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
-          NavigationDestination(icon: Icon(Icons.apartment), label: 'Kos'),
-          NavigationDestination(icon: Icon(Icons.campaign), label: 'Promosi'),
-          NavigationDestination(icon: Icon(Icons.people), label: 'Penghuni'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Akun'),
         ],
       ),
     );
