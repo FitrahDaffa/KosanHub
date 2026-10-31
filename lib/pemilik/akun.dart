@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pemilik/akun.dart';
-import 'package:flutter_application_1/pemilik/dashboard.dart';
-import 'package:flutter_application_1/pemilik/pemasaran.dart';
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
+import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
 class Akun extends StatelessWidget {
   const Akun({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PemilikScaffold(
+      selectedIndex: 4,
       backgroundColor: const Color(0xFFF3F7FF),
       appBar: AppBar(
         title: const Column(
@@ -55,11 +55,27 @@ class Akun extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Row(
-                    children: const [
-                      _Ringkasan(icon: Icons.home, angka: '4', label: 'Kos'),
-                      _Ringkasan(icon: Icons.people, angka: '24', label: 'Penghuni'),
-                      _Ringkasan(icon: Icons.message, angka: '12', label: 'Pesan'),
-                      _Ringkasan(icon: Icons.campaign, angka: '3', label: 'Promosi'),
+                    children: [
+                      _Ringkasan(
+                        icon: Icons.home,
+                        angka: '${jumlahKos()}',
+                        label: 'Kos',
+                      ),
+                      _Ringkasan(
+                        icon: Icons.people,
+                        angka: '${jumlahPenghuni()}',
+                        label: 'Penghuni',
+                      ),
+                      const _Ringkasan(
+                        icon: Icons.message,
+                        angka: '12',
+                        label: 'Pesan',
+                      ),
+                      _Ringkasan(
+                        icon: Icons.campaign,
+                        angka: '${jumlahPromosiAktif()}',
+                        label: 'Promosi',
+                      ),
                     ],
                   ),
                 ],
@@ -92,29 +108,6 @@ class Akun extends StatelessWidget {
               side: const BorderSide(color: Colors.red),
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 4,
-        onDestinationSelected: (index) {
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Dashboard()),
-            );
-          }else if(index == 4){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Pemasaran()),
-            );
-          }
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
-          NavigationDestination(icon: Icon(Icons.people), label: 'Penghuni'),
-          NavigationDestination(icon: Icon(Icons.campaign), label: 'Pemasaran'),
-          NavigationDestination(icon: Icon(Icons.apartment), label: 'Kos'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Akun'),
         ],
       ),
     );

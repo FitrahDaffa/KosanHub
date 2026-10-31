@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
+import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
+import 'package:flutter_application_1/pemilik/penghuni.dart';
 class Kos extends StatefulWidget {
-  final VoidCallback? onOpenPenghuni;
-
-  const Kos({super.key, this.onOpenPenghuni});
+  const Kos({super.key});
 
   @override
   State<Kos> createState() => _KosState();
@@ -13,43 +13,11 @@ class _KosState extends State<Kos> {
   final _searchController = TextEditingController();
   String _query = '';
 
-  static const _dataKos = [
-    _KosItem(
-      name: 'Kos Melati',
-      address: 'Jl. Cempaka No. 10, Bandung',
-      rooms: 8,
-      tenants: 8,
-      colors: [Color(0xFFB7D7F5), Color(0xFFE8F2FF)],
-    ),
-    _KosItem(
-      name: 'Kos Harapan',
-      address: 'Jl. Mawar No. 8, Bandung',
-      rooms: 6,
-      tenants: 6,
-      colors: [Color(0xFFC8E1D1), Color(0xFFEDF7EF)],
-    ),
-    _KosItem(
-      name: 'Kos Sinar Baru',
-      address: 'Jl. Anggrek No. 12, Bandung',
-      rooms: 5,
-      tenants: 5,
-      colors: [Color(0xFFE5D5B8), Color(0xFFFFF6E6)],
-    ),
-    _KosItem(
-      name: 'Kos Cemara',
-      address: 'Jl. Melati No. 5, Bandung',
-      rooms: 4,
-      tenants: 4,
-      active: false,
-      colors: [Color(0xFFC9D5E7), Color(0xFFF0F4FA)],
-    ),
-  ];
-
-  List<_KosItem> get _filteredKos => _dataKos
+  List<DataKos> get _filteredKos => daftarKos
       .where(
         (kos) =>
-            kos.name.toLowerCase().contains(_query) ||
-            kos.address.toLowerCase().contains(_query),
+            kos.nama.toLowerCase().contains(_query) ||
+            kos.alamat.toLowerCase().contains(_query),
       )
       .toList();
 
@@ -61,55 +29,72 @@ class _KosState extends State<Kos> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-      children: [
-        const _TenantSummary(),
-        const SizedBox(height: 20),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final title = const Text(
-              'Daftar Kos',
-              style: TextStyle(
-                color: Color(0xFF123A83),
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            );
-            final search = _buildSearchField();
-
-            if (constraints.maxWidth > 600) {
-              return Row(
-                children: [
-                  title,
-                  const Spacer(),
-                  SizedBox(width: 330, child: search),
-                ],
+    return PemilikScaffold(
+      selectedIndex: 1,
+      backgroundColor: const Color(0xFFF3F7FF),
+      appBar: AppBar(
+        title: const Text('Daftar Kos'),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+        children: [
+          _TenantSummary(),
+          const SizedBox(height: 20),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final title = const Text(
+                'Daftar Kos',
+                style: TextStyle(
+                  color: Color(0xFF123A83),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               );
-            }
+              final search = _buildSearchField();
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [title, const SizedBox(height: 10), search],
-            );
-          },
-        ),
-        const SizedBox(height: 12),
-        if (_filteredKos.isEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 36),
-            child: Center(child: Text('Kos tidak ditemukan.')),
-          )
-        else
-          ..._filteredKos.map(
-            (kos) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: _KosCard(kos: kos, onViewTenants: widget.onOpenPenghuni),
-            ),
+              if (constraints.maxWidth > 600) {
+                return Row(
+                  children: [
+                    title,
+                    const Spacer(),
+                    SizedBox(width: 330, child: search),
+                  ],
+                );
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [title, const SizedBox(height: 10), search],
+              );
+            },
           ),
-        const SizedBox(height: 4),
-        const _GroupChatCard(),
-      ],
+          const SizedBox(height: 12),
+          if (_filteredKos.isEmpty)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 36),
+              child: Center(child: Text('Kos tidak ditemukan.')),
+            )
+          else
+            ..._filteredKos.map(
+              (kos) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _KosCard(
+                  kos: kos,
+                  onViewTenants: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Penghuni(idKos: kos.id),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          const SizedBox(height: 4),
+          const _GroupChatCard(),
+        ],
+      ),
     );
   }
 
@@ -137,7 +122,7 @@ class _KosState extends State<Kos> {
 }
 
 class _TenantSummary extends StatelessWidget {
-  const _TenantSummary();
+  _TenantSummary();
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +149,7 @@ class _TenantSummary extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 14),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -177,7 +162,7 @@ class _TenantSummary extends StatelessWidget {
                       ),
                       SizedBox(height: 3),
                       Text(
-                        '24 Orang',
+                        '${jumlahPenghuni()} Orang',
                         style: TextStyle(
                           color: Color(0xFF123A83),
                           fontSize: 22,
@@ -185,7 +170,7 @@ class _TenantSummary extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'dari 4 kos yang Anda kelola',
+                        'dari ${jumlahKos()} kos yang Anda kelola',
                         style: TextStyle(
                           color: Color(0xFF7187B2),
                           fontSize: 12,
@@ -196,12 +181,12 @@ class _TenantSummary extends StatelessWidget {
                 ),
               ],
             );
-            const statuses = Row(
+            final statuses = Row(
               children: [
                 Expanded(
                   child: _StatusCard(
                     label: 'Tinggal',
-                    count: '21',
+                    count: '${jumlahPenghuniStatus('Aktif')}',
                     color: Color(0xFF16B878),
                   ),
                 ),
@@ -209,7 +194,7 @@ class _TenantSummary extends StatelessWidget {
                 Expanded(
                   child: _StatusCard(
                     label: 'Cuti',
-                    count: '2',
+                    count: '${jumlahPenghuniStatus('Cuti')}',
                     color: Color(0xFFFFB51B),
                   ),
                 ),
@@ -217,7 +202,7 @@ class _TenantSummary extends StatelessWidget {
                 Expanded(
                   child: _StatusCard(
                     label: 'Keluar',
-                    count: '1',
+                    count: '${jumlahPenghuniStatus('Keluar')}',
                     color: Color(0xFFF04444),
                   ),
                 ),
@@ -314,7 +299,7 @@ class _StatusCard extends StatelessWidget {
 }
 
 class _KosCard extends StatelessWidget {
-  final _KosItem kos;
+  final DataKos kos;
   final VoidCallback? onViewTenants;
 
   const _KosCard({required this.kos, required this.onViewTenants});
@@ -337,11 +322,11 @@ class _KosCard extends StatelessWidget {
             final information = Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _KosIllustration(colors: kos.colors),
+                _KosIllustration(colors: kos.warna),
                 const SizedBox(width: 12),
                 Expanded(child: _KosInformation(kos: kos)),
                 PopupMenuButton<String>(
-                  tooltip: 'Opsi ${kos.name}',
+                  tooltip: 'Opsi ${kos.nama}',
                   icon: const Icon(Icons.more_vert, color: Color(0xFF7187B2)),
                   itemBuilder: (context) => const [
                     PopupMenuItem(value: 'detail', child: Text('Detail kos')),
@@ -349,7 +334,7 @@ class _KosCard extends StatelessWidget {
                   ],
                   onSelected: (value) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('$value: ${kos.name}')),
+                      SnackBar(content: Text('$value: ${kos.nama}')),
                     );
                   },
                 ),
@@ -364,7 +349,7 @@ class _KosCard extends StatelessWidget {
                     children: [
                       Expanded(child: information),
                       const SizedBox(width: 8),
-                      _ChatButton(active: kos.active),
+                      _ChatButton(active: kos.aktif),
                     ],
                   )
                 else ...[
@@ -372,7 +357,7 @@ class _KosCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: _ChatButton(active: kos.active),
+                    child: _ChatButton(active: kos.aktif),
                   ),
                 ],
                 const SizedBox(height: 10),
@@ -380,7 +365,9 @@ class _KosCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    _TenantAvatarStack(count: kos.tenants),
+                    _TenantAvatarStack(
+                      count: jumlahPenghuniKos(kos.id),
+                    ),
                     const Spacer(),
                     TextButton(
                       onPressed: onViewTenants,
@@ -409,7 +396,7 @@ class _KosCard extends StatelessWidget {
 }
 
 class _KosInformation extends StatelessWidget {
-  final _KosItem kos;
+  final DataKos kos;
 
   const _KosInformation({required this.kos});
 
@@ -423,7 +410,7 @@ class _KosInformation extends StatelessWidget {
           spacing: 8,
           children: [
             Text(
-              kos.name,
+              kos.nama,
               style: const TextStyle(
                 color: Color(0xFF123A83),
                 fontSize: 17,
@@ -433,15 +420,15 @@ class _KosInformation extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: kos.active
+                color: kos.aktif
                     ? const Color(0xFFE1F7EC)
                     : const Color(0xFFEBF0F8),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                kos.active ? 'Aktif' : 'Tidak Aktif',
+                kos.aktif ? 'Aktif' : 'Tidak Aktif',
                 style: TextStyle(
-                  color: kos.active
+                  color: kos.aktif
                       ? const Color(0xFF169B64)
                       : const Color(0xFF7187B2),
                   fontSize: 11,
@@ -458,7 +445,7 @@ class _KosInformation extends StatelessWidget {
             const SizedBox(width: 4),
             Expanded(
               child: Text(
-                kos.address,
+                kos.alamat,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Color(0xFF7187B2), fontSize: 12),
               ),
@@ -470,10 +457,13 @@ class _KosInformation extends StatelessWidget {
           spacing: 14,
           runSpacing: 6,
           children: [
-            _InfoMetric(icon: Icons.calendar_month, text: '${kos.rooms} Kamar'),
+            _InfoMetric(
+              icon: Icons.calendar_month,
+              text: '${kos.jumlahKamar} Kamar',
+            ),
             _InfoMetric(
               icon: Icons.groups_rounded,
-              text: '${kos.tenants} Penghuni',
+              text: '${jumlahPenghuniKos(kos.id)} Penghuni',
             ),
           ],
         ),
@@ -641,20 +631,3 @@ class _GroupChatCard extends StatelessWidget {
   );
 }
 
-class _KosItem {
-  final String name;
-  final String address;
-  final int rooms;
-  final int tenants;
-  final bool active;
-  final List<Color> colors;
-
-  const _KosItem({
-    required this.name,
-    required this.address,
-    required this.rooms,
-    required this.tenants,
-    required this.colors,
-    this.active = true,
-  });
-}

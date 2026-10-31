@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pemilik/akun.dart';
-import 'package:flutter_application_1/pemilik/dashboard.dart';
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
+import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
 
 class Pemasaran extends StatelessWidget {
   const Pemasaran({super.key});
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
-    return Scaffold(
+    return PemilikScaffold(
+      selectedIndex: 2,
       backgroundColor: const Color(0xFFF3F7FF),
       appBar: AppBar(
         title: const Text('Pemasaran'),
@@ -64,52 +64,31 @@ class Pemasaran extends StatelessWidget {
             'Promosi Aktif',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const _KartuPromosi(
-            nama: 'Kos Melati',
-            alamat: 'Jl. Cempaka No. 10, Bandung',
-            status: 'Aktif',
-            warnaStatus: Colors.green,
-          ),
-          const _KartuPromosi(
-            nama: 'Kos Harapan',
-            alamat: 'Jl. Mawar No. 8, Bandung',
-            status: 'Aktif',
-            warnaStatus: Colors.green,
-          ),
+          ...daftarKos
+              .where((kos) => kos.aktif)
+              .map(
+                (kos) => _KartuPromosi(
+                  nama: kos.nama,
+                  alamat: kos.alamat,
+                  status: 'Aktif',
+                  warnaStatus: Colors.green,
+                ),
+              ),
           const SizedBox(height: 12),
           const Text(
             'Promosi Nonaktif',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const _KartuPromosi(
-            nama: 'Kos Sinar Baru',
-            alamat: 'Jl. Anggrek No. 12, Bandung',
-            status: 'Nonaktif',
-            warnaStatus: Colors.grey,
-          ),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 2,
-        onDestinationSelected: (index) {
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Dashboard()),
-            );
-          }else if(index == 4){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Akun()),
-            );
-          }
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
-          NavigationDestination(icon: Icon(Icons.apartment), label: 'Kos'),
-          NavigationDestination(icon: Icon(Icons.campaign), label: 'Promosi'),
-          NavigationDestination(icon: Icon(Icons.people), label: 'Penghuni'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Akun'),
+          ...daftarKos
+              .where((kos) => !kos.aktif)
+              .map(
+                (kos) => _KartuPromosi(
+                  nama: kos.nama,
+                  alamat: kos.alamat,
+                  status: 'Nonaktif',
+                  warnaStatus: Colors.grey,
+                ),
+              ),
         ],
       ),
     );
