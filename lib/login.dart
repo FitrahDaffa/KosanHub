@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
     } else if (email == 'rama' && password == 'rama'){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardPencariKosan()),
+        MaterialPageRoute(builder: (context) => const Dashboard()),
       );
     }
   }
