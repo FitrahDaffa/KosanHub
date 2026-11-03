@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/login.dart';
 import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
 import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
+
 class Akun extends StatelessWidget {
   const Akun({super.key});
 
@@ -90,19 +92,31 @@ class Akun extends StatelessWidget {
                 Divider(height: 1),
                 _MenuAkun(icon: Icons.security, judul: 'Keamanan'),
                 Divider(height: 1),
-                _MenuAkun(icon: Icons.notifications, judul: 'Pengaturan Notifikasi'),
+                _MenuAkun(
+                  icon: Icons.notifications,
+                  judul: 'Pengaturan Notifikasi',
+                ),
                 Divider(height: 1),
                 _MenuAkun(icon: Icons.help, judul: 'Bantuan & Panduan'),
                 Divider(height: 1),
-                _MenuAkun(icon: Icons.description, judul: 'Kebijakan & Privasi'),
+                _MenuAkun(
+                  icon: Icons.description,
+                  judul: 'Kebijakan & Privasi',
+                ),
               ],
             ),
           ),
           const SizedBox(height: 16),
           OutlinedButton.icon(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => const Login()),
+              (route) => false,
+            ),
             icon: const Icon(Icons.logout, color: Colors.red),
-            label: const Text('Keluar Akun', style: TextStyle(color: Colors.red)),
+            label: const Text(
+              'Keluar Akun',
+              style: TextStyle(color: Colors.red),
+            ),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.all(16),
               side: const BorderSide(color: Colors.red),
@@ -133,7 +147,11 @@ class _Ringkasan extends StatelessWidget {
           Icon(icon, color: Colors.blue),
           const SizedBox(height: 6),
           Text(angka, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(label, textAlign: TextAlign.center, style: const TextStyle(fontSize: 10)),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 10),
+          ),
         ],
       ),
     );
