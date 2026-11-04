@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TenantSummary extends StatelessWidget {
-  const TenantSummary({super.key});
+  final int total;
+  final int active;
+  final int leave;
+  final int movedOut;
+  final int kosCount;
+
+  const TenantSummary({super.key, required this.total, required this.active, required this.leave, required this.movedOut, required this.kosCount});
 
   @override
   Widget build(BuildContext context) {
@@ -24,26 +30,26 @@ class TenantSummary extends StatelessWidget {
                   child: Icon(Icons.groups_rounded, color: Colors.blue, size: 30),
                 ),
                 const SizedBox(width: 14),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Total Penghuni', style: TextStyle(color: Color(0xFF123A83), fontWeight: FontWeight.w600)),
-                      SizedBox(height: 3),
-                      Text('24 Orang', style: TextStyle(color: Color(0xFF123A83), fontSize: 22, fontWeight: FontWeight.bold)),
-                      Text('dari 4 kos yang Anda kelola', style: TextStyle(color: Color(0xFF7187B2), fontSize: 12)),
+                      const Text('Total Penghuni', style: TextStyle(color: Color(0xFF123A83), fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 3),
+                      Text('$total Orang', style: TextStyle(color: Color(0xFF123A83), fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text('dari $kosCount kos yang Anda kelola', style: TextStyle(color: Color(0xFF7187B2), fontSize: 12)),
                     ],
                   ),
                 ),
               ],
             );
-            const statuses = Row(
+            final statuses = Row(
               children: [
-                Expanded(child: _StatusCard(label: 'Tinggal', count: '21', color: Color(0xFF16B878))),
-                SizedBox(width: 8),
-                Expanded(child: _StatusCard(label: 'Cuti', count: '2', color: Color(0xFFFFB51B))),
-                SizedBox(width: 8),
-                Expanded(child: _StatusCard(label: 'Keluar', count: '1', color: Color(0xFFF04444))),
+                Expanded(child: _StatusCard(label: 'Tinggal', count: '$active', color: const Color(0xFF16B878))),
+                const SizedBox(width: 8),
+                Expanded(child: _StatusCard(label: 'Cuti', count: '$leave', color: const Color(0xFFFFB51B))),
+                const SizedBox(width: 8),
+                Expanded(child: _StatusCard(label: 'Keluar', count: '$movedOut', color: const Color(0xFFF04444))),
               ],
             );
 

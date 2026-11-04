@@ -4,9 +4,10 @@ import '../kos_item.dart';
 
 class KosCard extends StatelessWidget {
   final KosItem kos;
+  final int tenantCount;
   final VoidCallback? onViewTenants;
 
-  const KosCard({super.key, required this.kos, required this.onViewTenants});
+  const KosCard({super.key, required this.kos, required this.tenantCount, required this.onViewTenants});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class KosCard extends StatelessWidget {
               children: [
                 _KosIllustration(colors: kos.colors),
                 const SizedBox(width: 12),
-                Expanded(child: _KosInformation(kos: kos)),
+                Expanded(child: _KosInformation(kos: kos, tenantCount: tenantCount)),
                 PopupMenuButton<String>(
                   tooltip: 'Opsi ${kos.name}',
                   icon: const Icon(Icons.more_vert, color: Color(0xFF7187B2)),
@@ -60,7 +61,7 @@ class KosCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    _TenantAvatarStack(count: kos.tenants),
+                    _TenantAvatarStack(count: tenantCount),
                     const Spacer(),
                     TextButton(
                       onPressed: onViewTenants,
@@ -83,8 +84,9 @@ class KosCard extends StatelessWidget {
 
 class _KosInformation extends StatelessWidget {
   final KosItem kos;
+  final int tenantCount;
 
-  const _KosInformation({required this.kos});
+  const _KosInformation({required this.kos, required this.tenantCount});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +119,7 @@ class _KosInformation extends StatelessWidget {
           runSpacing: 6,
           children: [
             _InfoMetric(icon: Icons.calendar_month, text: '${kos.rooms} Kamar'),
-            _InfoMetric(icon: Icons.groups_rounded, text: '${kos.tenants} Penghuni'),
+            _InfoMetric(icon: Icons.groups_rounded, text: '$tenantCount Penghuni'),
           ],
         ),
       ],
