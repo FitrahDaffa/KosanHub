@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
 
 class TenantSummary extends StatelessWidget {
-  final int total;
-  final int active;
-  final int leave;
-  final int movedOut;
-  final int kosCount;
-
-  const TenantSummary({super.key, required this.total, required this.active, required this.leave, required this.movedOut, required this.kosCount});
+  const TenantSummary();
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +22,40 @@ class TenantSummary extends StatelessWidget {
                 const CircleAvatar(
                   radius: 30,
                   backgroundColor: Color(0xFFE5F0FF),
-                  child: Icon(Icons.groups_rounded, color: Colors.blue, size: 30),
+                  child: Icon(
+                    Icons.groups_rounded,
+                    color: Colors.blue,
+                    size: 30,
+                  ),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Total Penghuni', style: TextStyle(color: Color(0xFF123A83), fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 3),
-                      Text('$total Orang', style: TextStyle(color: Color(0xFF123A83), fontSize: 22, fontWeight: FontWeight.bold)),
-                      Text('dari $kosCount kos yang Anda kelola', style: TextStyle(color: Color(0xFF7187B2), fontSize: 12)),
+                      Text(
+                        'Total Penghuni',
+                        style: TextStyle(
+                          color: Color(0xFF123A83),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        '${jumlahPenghuni()} Orang',
+                        style: TextStyle(
+                          color: Color(0xFF123A83),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'dari ${jumlahKos()} kos yang Anda kelola',
+                        style: TextStyle(
+                          color: Color(0xFF7187B2),
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -45,11 +63,29 @@ class TenantSummary extends StatelessWidget {
             );
             final statuses = Row(
               children: [
-                Expanded(child: _StatusCard(label: 'Tinggal', count: '$active', color: const Color(0xFF16B878))),
-                const SizedBox(width: 8),
-                Expanded(child: _StatusCard(label: 'Cuti', count: '$leave', color: const Color(0xFFFFB51B))),
-                const SizedBox(width: 8),
-                Expanded(child: _StatusCard(label: 'Keluar', count: '$movedOut', color: const Color(0xFFF04444))),
+                Expanded(
+                  child: _StatusCard(
+                    label: 'Tinggal',
+                    count: '${jumlahPenghuniStatus('Aktif')}',
+                    color: Color(0xFF16B878),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: _StatusCard(
+                    label: 'Cuti',
+                    count: '${jumlahPenghuniStatus('Cuti')}',
+                    color: Color(0xFFFFB51B),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: _StatusCard(
+                    label: 'Keluar',
+                    count: '${jumlahPenghuniStatus('Keluar')}',
+                    color: Color(0xFFF04444),
+                  ),
+                ),
               ],
             );
 
@@ -58,12 +94,16 @@ class TenantSummary extends StatelessWidget {
                 children: [
                   Expanded(flex: 5, child: summary),
                   const SizedBox(width: 16),
-                  const SizedBox(height: 82, child: VerticalDivider(color: Color(0xFFDCE8FA))),
+                  const SizedBox(
+                    height: 82,
+                    child: VerticalDivider(color: Color(0xFFDCE8FA)),
+                  ),
                   const SizedBox(width: 12),
                   Expanded(flex: 6, child: statuses),
                 ],
               );
             }
+
             return Column(
               children: [
                 summary,
@@ -85,13 +125,20 @@ class _StatusCard extends StatelessWidget {
   final String count;
   final Color color;
 
-  const _StatusCard({required this.label, required this.count, required this.color});
+  const _StatusCard({
+    required this.label,
+    required this.count,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      decoration: BoxDecoration(color: const Color(0xFFF3F7FD), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F7FD),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -99,7 +146,16 @@ class _StatusCard extends StatelessWidget {
             children: [
               Icon(Icons.circle, size: 11, color: color),
               const SizedBox(width: 6),
-              Flexible(child: Text(label, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Color(0xFF627AA9), fontSize: 12))),
+              Flexible(
+                child: Text(
+                  label,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Color(0xFF627AA9),
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 9),
@@ -107,7 +163,13 @@ class _StatusCard extends StatelessWidget {
             children: [
               const Icon(Icons.person, size: 17, color: Colors.blue),
               const SizedBox(width: 6),
-              Text(count, style: const TextStyle(color: Color(0xFF123A83), fontWeight: FontWeight.bold)),
+              Text(
+                count,
+                style: const TextStyle(
+                  color: Color(0xFF123A83),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ],
