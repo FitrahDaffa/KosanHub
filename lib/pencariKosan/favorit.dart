@@ -32,10 +32,18 @@ class FavoritPencariKosan extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: const [
-                              Icon(Icons.arrow_back, color: Colors.white),
-                              SizedBox(width: 12),
-                              Text('Favorit', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                            children: [ // <-- Hapus kata 'const' di sini kalau ada error merah
+    IconButton(
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(),
+      icon: const Icon(Icons.arrow_back, color: Colors.white),
+      onPressed: () {
+        // Perintah untuk balik ke halaman dashboard
+        Navigator.pushReplacementNamed(context, '/pencari/dashboard');
+      },
+    ),
+    const SizedBox(width: 12),
+    const Text('Favorit', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                             ],
                           ),
                           const Icon(Icons.notifications_none, color: Colors.white),
