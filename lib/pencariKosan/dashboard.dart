@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'pencari_navigation_bar.dart'; 
 
 class DashboardPencariKosan extends StatelessWidget {
-  const DashboardPencariKosan({Key? key}) : super(key: key);
+  const DashboardPencariKosan({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PencariScaffold(
+      selectedIndex: 0, 
       backgroundColor: const Color(0xFFF3F4F6),
       body: SingleChildScrollView(
         child: Column(
@@ -30,8 +32,8 @@ class DashboardPencariKosan extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
-                            children: [
+                          Row(
+                            children: const [
                               Icon(Icons.home, color: Colors.white),
                               SizedBox(width: 8),
                               Text('KosanHub', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
@@ -71,14 +73,14 @@ class DashboardPencariKosan extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         hintText: 'Cari nama kos, lokasi, atau fasilitas...',
-                        hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
-                        prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                        suffixIcon: const Icon(Icons.tune, color: Color(0xFF2F80ED)),
+                        hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        suffixIcon: Icon(Icons.tune, color: Color(0xFF2F80ED)),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15),
                       ),
                     ),
                   ),
@@ -132,7 +134,7 @@ class DashboardPencariKosan extends StatelessWidget {
                         backgroundColor: const Color(0xFF2F80ED),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
-                      child: const Text('Lihat Semua >', style: TextStyle(fontSize: 10)),
+                      child: const Text('Lihat Semua >', style: TextStyle(fontSize: 10, color: Colors.white)),
                     )
                   ],
                 ),
@@ -153,7 +155,7 @@ class DashboardPencariKosan extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             
-            // List Rekomendasi (Dummy Data)
+            // List Rekomendasi
             _buildKosCard('Kos Melati', 'Jl. Cempaka No. 10, Bandung', 'Rp 750.000', '4.8', true, ['WiFi', 'AC', 'Dapur', 'Parkir']),
             _buildKosCard('Kos Harapan', 'Jl. Mawar No. 8, Bandung', 'Rp 700.000', '4.5', true, ['WiFi', 'AC', 'Parkir', 'Laundry']),
             const SizedBox(height: 20),
@@ -191,7 +193,6 @@ class DashboardPencariKosan extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Image Placeholder
           Container(
             width: 100, height: 100,
             decoration: BoxDecoration(
