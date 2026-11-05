@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'pencari_navigation_bar.dart'; // Import kerangka navigasi
 
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class FavoritPencariKosan extends StatelessWidget {
+  const FavoritPencariKosan({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PencariScaffold(
+      selectedIndex: 1, // Index 1 untuk menu Favorit
       backgroundColor: const Color(0xFFF3F4F6),
       body: SingleChildScrollView(
         child: Column(
@@ -30,10 +32,10 @@ class FavoriteScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: [
-                              const Icon(Icons.arrow_back, color: Colors.white),
-                              const SizedBox(width: 12),
-                              const Text('Favorit', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                            children: const [
+                              Icon(Icons.arrow_back, color: Colors.white),
+                              SizedBox(width: 12),
+                              Text('Favorit', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                             ],
                           ),
                           const Icon(Icons.notifications_none, color: Colors.white),
