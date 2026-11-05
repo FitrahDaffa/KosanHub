@@ -1,62 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pemilik/kos.dart';
-import 'package:flutter_application_1/pemilik/penghuni.dart';
+import 'package:flutter_application_1/pemilik/data/kosan_data.dart';
+import 'package:flutter_application_1/pemilik/pemilik_navigation_bar.dart';
 
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  int selectedIndex = 0;
-  static const _pageTitles = [
-    'KosanHub',
-    'Data Kos',
-    'Promosi',
-    'Penghuni',
-    'Akun',
-  ];
-
-  Widget _selectedPage() {
-    switch (selectedIndex) {
-      case 1:
-        return Kos(onOpenPenghuni: () => setState(() => selectedIndex = 3));
-      case 2:
-        return const _SimplePage(icon: Icons.campaign, title: 'Promosi');
-      case 3:
-        return const Penghuni();
-      case 4:
-        return const _SimplePage(icon: Icons.person, title: 'Akun');
-      default:
-        return const _DashboardHome();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF3F7FF),
+    return PemilikScaffold(
+      selectedIndex: 0,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(_pageTitles[selectedIndex]),
+        title: const Text('KosanHub'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: _selectedPage(),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (index) {
-          setState(() => selectedIndex = index);
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
-          NavigationDestination(icon: Icon(Icons.apartment), label: 'Kos'),
-          NavigationDestination(icon: Icon(Icons.campaign), label: 'Promosi'),
-          NavigationDestination(icon: Icon(Icons.people), label: 'Penghuni'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Akun'),
-        ],
-      ),
+      body: const _DashboardHome(),
     );
   }
 }
@@ -75,26 +34,18 @@ class _DashboardHome extends StatelessWidget {
         ),
         const Text('Berikut ringkasan kos Anda hari ini.'),
         const SizedBox(height: 20),
-        const Row(
+        Row(
           children: [
-            Expanded(
-              child: SummaryCard(title: 'Total Kos', value: '2'),
-            ),
-            SizedBox(width: 10),
-            Expanded(
-              child: SummaryCard(title: 'Total Kamar', value: '20'),
-            ),
+            Expanded(child: SummaryCard(title: 'Total Kos', value: '${jumlahKos()}')),
+            const SizedBox(width: 10),
+            Expanded(child: SummaryCard(title: 'Total Kamar', value: '${jumlahKamar()}')),
           ],
         ),
-        const Row(
+        Row(
           children: [
-            Expanded(
-              child: SummaryCard(title: 'Kamar Terisi', value: '15'),
-            ),
-            SizedBox(width: 10),
-            Expanded(
-              child: SummaryCard(title: 'Kamar Kosong', value: '5'),
-            ),
+            Expanded(child: SummaryCard(title: 'Kamar Terisi', value: '${jumlahKamarTerisi()}')),
+            const SizedBox(width: 10),
+            Expanded(child: SummaryCard(title: 'Kamar Kosong', value: '${jumlahKamarKosong()}')),
           ],
         ),
         const SizedBox(height: 16),
@@ -111,37 +62,19 @@ class _DashboardHome extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Text(
-          'Menu Utama',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8),
-        const Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            MenuCard(title: 'Data Kos', icon: Icons.home),
-            MenuCard(title: 'Data Kamar', icon: Icons.bed),
-            MenuCard(title: 'Penghuni', icon: Icons.people),
-            MenuCard(title: 'Pembayaran', icon: Icons.payment),
-            MenuCard(title: 'Pemasaran', icon: Icons.campaign),
-            MenuCard(title: 'Komplain', icon: Icons.chat),
-          ],
-        ),
-        const SizedBox(height: 16),
-        const Text(
           'Aktivitas Terbaru',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        Card(
+        const Card(
           child: Column(
-            children: const [
+            children: [
               ListTile(
                 leading: Icon(Icons.payment, color: Colors.blue),
                 title: Text('Pembayaran Kamar A1'),
                 subtitle: Text('Budi Santoso · 2 jam lalu'),
                 trailing: Text('Rp 750.000'),
               ),
-              Divider(height: 1, thickness: 1),
+              Divider(height: 1),
               ListTile(
                 leading: Icon(Icons.person, color: Colors.blue),
                 title: Text('Penghuni Baru'),
@@ -154,25 +87,6 @@ class _DashboardHome extends StatelessWidget {
       ],
     );
   }
-}
-
-class _SimplePage extends StatelessWidget {
-  final IconData icon;
-  final String title;
-
-  const _SimplePage({required this.icon, required this.title});
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 56, color: Colors.blue),
-        const SizedBox(height: 12),
-        Text('$title belum tersedia', style: const TextStyle(fontSize: 18)),
-      ],
-    ),
-  );
 }
 
 class SummaryCard extends StatelessWidget {
@@ -191,37 +105,8 @@ class SummaryCard extends StatelessWidget {
           children: [
             Text(title),
             const SizedBox(height: 8),
-            Text(
-              value,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            Text(value, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class MenuCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const MenuCard({super.key, required this.title, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 105,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Icon(icon, color: Colors.blue),
-              const SizedBox(height: 6),
-              Text(title, textAlign: TextAlign.center),
-            ],
-          ),
         ),
       ),
     );
