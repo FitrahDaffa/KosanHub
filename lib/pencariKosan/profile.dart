@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ProfilPencariKosan extends StatefulWidget {
@@ -13,19 +12,14 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
   final Color background = const Color(0xFFF3F7FF);
 
   void tampilkanPesan(String pesan) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(pesan)),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(pesan)));
   }
 
   Widget menuItem(IconData icon, String judul, String deskripsi) {
     return InkWell(
       onTap: () => tampilkanPesan('$judul dipilih'),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 15,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         child: Row(
           children: [
             CircleAvatar(
@@ -82,10 +76,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF7585A5),
-            ),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF7585A5)),
           ),
         ],
       ),
@@ -104,10 +95,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
               height: 210,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    biru,
-                    const Color(0xFF438FF0),
-                  ],
+                  colors: [biru, const Color(0xFF438FF0)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -116,10 +104,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                   bottomRight: Radius.circular(35),
                 ),
               ),
-              padding: const EdgeInsets.only(
-                top: 55,
-                left: 24,
-              ),
+              padding: const EdgeInsets.only(top: 55, left: 24),
               alignment: Alignment.topLeft,
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,10 +120,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                   SizedBox(height: 5),
                   Text(
                     'Kelola akun dan pengaturan Anda',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ],
               ),
@@ -174,11 +156,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                             CircleAvatar(
                               radius: 43,
                               backgroundColor: const Color(0xFFE7F1FF),
-                              child: Icon(
-                                Icons.person,
-                                size: 55,
-                                color: biru,
-                              ),
+                              child: Icon(Icons.person, size: 55, color: biru),
                             ),
                             const SizedBox(width: 16),
                             const Expanded(
@@ -234,8 +212,16 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                           ),
                           child: Row(
                             children: [
-                              statistik(Icons.favorite_border, '3', 'Kos Favorit'),
-                              statistik(Icons.chat_bubble_outline, '5', 'Pesan'),
+                              statistik(
+                                Icons.favorite_border,
+                                '3',
+                                'Kos Favorit',
+                              ),
+                              statistik(
+                                Icons.chat_bubble_outline,
+                                '5',
+                                'Pesan',
+                              ),
                               statistik(Icons.history, '2', 'Riwayat Booking'),
                               statistik(Icons.star_border, '0', 'Ulasan'),
                             ],
@@ -293,9 +279,10 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                         const Divider(height: 1, indent: 20, endIndent: 20),
                         InkWell(
                           onTap: () {
-                            Navigator.popUntil(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
-                              (route) => route.isFirst,
+                              '/',
+                              (route) => false,
                             );
                           },
                           child: const Padding(
@@ -317,7 +304,8 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                                 SizedBox(width: 16),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Keluar',
@@ -361,11 +349,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                     ),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.home_work_outlined,
-                          size: 55,
-                          color: biru,
-                        ),
+                        Icon(Icons.home_work_outlined, size: 55, color: biru),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -435,14 +419,8 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
             icon: Icon(Icons.chat_bubble_outline),
             label: 'Pesan',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.search),
-            label: 'Pencarian',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
+          NavigationDestination(icon: Icon(Icons.search), label: 'Pencarian'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),
     );
