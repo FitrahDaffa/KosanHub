@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'kosan_data.dart';
 import 'kos_card.dart';
+import 'pencari_navigation_bar.dart'; 
 
 class PencarianPage extends StatefulWidget {
   const PencarianPage({super.key});
@@ -11,8 +11,7 @@ class PencarianPage extends StatefulWidget {
 }
 
 class _PencarianPageState extends State<PencarianPage> {
-  final TextEditingController searchController =
-      TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   String lokasi = 'Semua Lokasi';
   String harga = 'Semua Harga';
@@ -32,23 +31,18 @@ class _PencarianPageState extends State<PencarianPage> {
             (item) => item.toLowerCase().contains(keyword),
           );
 
-      final cocokLokasi =
-          lokasi == 'Semua Lokasi' || kos.lokasi == lokasi;
+      final cocokLokasi = lokasi == 'Semua Lokasi' || kos.lokasi == lokasi;
 
       final cocokHarga =
           harga == 'Semua Harga' ||
           (harga == 'Di bawah Rp700 ribu' && kos.harga < 700000) ||
-          (harga == 'Rp700-800 ribu' &&
-              kos.harga >= 700000 &&
-              kos.harga <= 800000) ||
+          (harga == 'Rp700-800 ribu' && kos.harga >= 700000 && kos.harga <= 800000) ||
           (harga == 'Di atas Rp800 ribu' && kos.harga > 800000);
 
-      final cocokTipe =
-          tipe == 'Semua Tipe' || kos.tipeKamar == tipe;
+      final cocokTipe = tipe == 'Semua Tipe' || kos.tipeKamar == tipe;
 
       final cocokFasilitas =
-          fasilitas == 'Semua Fasilitas' ||
-          kos.fasilitas.contains(fasilitas);
+          fasilitas == 'Semua Fasilitas' || kos.fasilitas.contains(fasilitas);
 
       return cocokKeyword &&
           cocokLokasi &&
@@ -124,7 +118,9 @@ class _PencarianPageState extends State<PencarianPage> {
   Widget build(BuildContext context) {
     final hasil = hasilPencarian;
 
-    return Scaffold(
+    // --- UBAH JADI PENCARISCAFFOLD ---
+    return PencariScaffold(
+      selectedIndex: 3, // Index 3 untuk menu Cari
       backgroundColor: const Color(0xFFF5F8FD),
       body: SafeArea(
         child: Column(
