@@ -122,16 +122,41 @@ class _KosState extends State<Kos> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Tambah Kos'),
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(decoration: InputDecoration(labelText: 'Nama kos')),
-            TextField(decoration: InputDecoration(labelText: 'Alamat')),
-            TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Jumlah kamar'),
+        content: SizedBox(
+          width: 320,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'lib/gambar demo/maps.png',
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 180,
+                      color: const Color(0xFFE5F0FF),
+                      alignment: Alignment.center,
+                      child: const Text('Gambar maps tidak dapat dimuat'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const TextField(
+                  decoration: InputDecoration(labelText: 'Nama kos'),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: 'Alamat'),
+                ),
+                const TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Jumlah kamar'),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
         actions: [
           TextButton(
