@@ -27,10 +27,14 @@ class _LoginState extends State<Login> {
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );
-    } else if (email == 'rama' && password == 'rama'){
+    } else if (email == 'rama' && password == 'rama') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const DashboardPencariKosan()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email atau password salah')),
       );
     }
   }
