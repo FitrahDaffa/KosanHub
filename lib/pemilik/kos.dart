@@ -59,6 +59,12 @@ class _KosState extends State<Kos> {
                   children: [
                     title,
                     const Spacer(),
+                    ElevatedButton.icon(
+                      onPressed: _showAddKosDialog,
+                      icon: const Icon(Icons.add),
+                      label: const Text('Tambah Kos'),
+                    ),
+                    const SizedBox(width: 12),
                     SizedBox(width: 330, child: search),
                   ],
                 );
@@ -66,7 +72,20 @@ class _KosState extends State<Kos> {
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [title, const SizedBox(height: 10), search],
+                children: [
+                  Row(
+                    children: [
+                      Expanded(child: title),
+                      ElevatedButton.icon(
+                        onPressed: _showAddKosDialog,
+                        icon: const Icon(Icons.add),
+                        label: const Text('Tambah Kos'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  search,
+                ],
               );
             },
           ),
@@ -93,6 +112,36 @@ class _KosState extends State<Kos> {
             ),
           const SizedBox(height: 4),
           const _GroupChatCard(),
+        ],
+      ),
+    );
+  }
+
+  void _showAddKosDialog() {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Tambah Kos'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(decoration: InputDecoration(labelText: 'Nama kos')),
+            TextField(decoration: InputDecoration(labelText: 'Alamat')),
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Jumlah kamar'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Tambah'),
+          ),
         ],
       ),
     );
