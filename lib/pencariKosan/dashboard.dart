@@ -51,38 +51,45 @@ class DashboardPencariKosan extends StatelessWidget {
                               ),
                             ],
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.person_outline,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ProfilPencariKosan(),
-                                ),
-                              );
-                            },
-                          ),
-                          Stack(
+
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
-                                Icons.notifications_none,
-                                color: Colors.white,
-                              ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 8,
-                                  height: 8,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.person_outline,
+                                  color: Colors.white,
                                 ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfilPencariKosan(),
+                                    ),
+                                  );
+                                },
+                              ),
+
+                              Stack(
+                                children: [
+                                  const Icon(
+                                    Icons.notifications_none,
+                                    color: Colors.white,
+                                  ),
+                                  Positioned(
+                                    right: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 8,
+                                      height: 8,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
