@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pencari_navigation_bar.dart'; // Import kerangka navigasi
+import 'pencari_navigation_bar.dart'; 
 
 class FavoritPencariKosan extends StatelessWidget {
   const FavoritPencariKosan({super.key});
@@ -7,7 +7,7 @@ class FavoritPencariKosan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PencariScaffold(
-      selectedIndex: 1, // Index 1 untuk menu Favorit
+      selectedIndex: 1, 
       backgroundColor: const Color(0xFFF3F4F6),
       body: SingleChildScrollView(
         child: Column(

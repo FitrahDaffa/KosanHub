@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pencari_navigation_bar.dart'; // Import kerangka navigasi
+import 'pencari_navigation_bar.dart'; 
 
 class DashboardPencariKosan extends StatelessWidget {
   const DashboardPencariKosan({super.key});
@@ -7,7 +7,7 @@ class DashboardPencariKosan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PencariScaffold(
-      selectedIndex: 0, // Index 0 untuk menu Beranda
+      selectedIndex: 0, 
       backgroundColor: const Color(0xFFF3F4F6),
       body: SingleChildScrollView(
         child: Column(
