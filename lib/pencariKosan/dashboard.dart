@@ -89,7 +89,6 @@ class DashboardPencariKosan extends StatelessWidget {
             ),
             const SizedBox(height: 40),
 
-            // Menu Kategori
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -105,7 +104,6 @@ class DashboardPencariKosan extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Banner Promo
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -142,7 +140,6 @@ class DashboardPencariKosan extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Rekomendasi
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -155,7 +152,6 @@ class DashboardPencariKosan extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             
-            // List Rekomendasi
             _buildKosCard('Kos Melati', 'Jl. Cempaka No. 10, Bandung', 'Rp 750.000', '4.8', true, ['WiFi', 'AC', 'Dapur', 'Parkir']),
             _buildKosCard('Kos Harapan', 'Jl. Mawar No. 8, Bandung', 'Rp 700.000', '4.5', true, ['WiFi', 'AC', 'Parkir', 'Laundry']),
             const SizedBox(height: 20),
