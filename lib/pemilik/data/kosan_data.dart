@@ -68,6 +68,15 @@ const daftarPenghuni = <DataPenghuni>[
   DataPenghuni(nama: 'Budi Santoso', idKos: 'melati', kamar: 'A1'),
   DataPenghuni(nama: 'Siti Nurhaliza', idKos: 'harapan', kamar: 'B3'),
   DataPenghuni(nama: 'Andi Pratama', idKos: 'melati', kamar: 'A2'),
+  DataPenghuni(nama: 'Rina Puspita', idKos: 'melati', kamar: 'A3'),
+  DataPenghuni(nama: 'Fajar Ramadhan', idKos: 'melati', kamar: 'A4'),
+  DataPenghuni(nama: 'Dewi Anggraini', idKos: 'harapan', kamar: 'B1'),
+  DataPenghuni(nama: 'Rizky Maulana', idKos: 'harapan', kamar: 'B2'),
+  DataPenghuni(nama: 'Nadia Putri', idKos: 'harapan', kamar: 'B4'),
+  DataPenghuni(nama: 'Yoga Pratama', idKos: 'sinar_baru', kamar: 'C2'),
+  DataPenghuni(nama: 'Maya Lestari', idKos: 'sinar_baru', kamar: 'C3'),
+  DataPenghuni(nama: 'Dimas Saputra', idKos: 'cemara', kamar: 'A2'),
+  DataPenghuni(nama: 'Intan Permata', idKos: 'cemara', kamar: 'A3'),
 ];
 
 DataKos? cariKos(String id) {
