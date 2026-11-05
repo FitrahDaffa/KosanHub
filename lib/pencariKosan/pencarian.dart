@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'kosan_data.dart';
 import 'kos_card.dart';
-import 'pencari_navigation_bar.dart'; 
+import 'pencari_navigation_bar.dart';
 
 class PencarianPage extends StatefulWidget {
   const PencarianPage({super.key});
@@ -31,18 +32,22 @@ class _PencarianPageState extends State<PencarianPage> {
             (item) => item.toLowerCase().contains(keyword),
           );
 
-      final cocokLokasi = lokasi == 'Semua Lokasi' || kos.lokasi == lokasi;
+      final cocokLokasi =
+          lokasi == 'Semua Lokasi' || kos.lokasi == lokasi;
 
       final cocokHarga =
           harga == 'Semua Harga' ||
           (harga == 'Di bawah Rp700 ribu' && kos.harga < 700000) ||
-          (harga == 'Rp700-800 ribu' && kos.harga >= 700000 && kos.harga <= 800000) ||
+          (harga == 'Rp700-800 ribu' &&
+              kos.harga >= 700000 &&
+              kos.harga <= 800000) ||
           (harga == 'Di atas Rp800 ribu' && kos.harga > 800000);
 
       final cocokTipe = tipe == 'Semua Tipe' || kos.tipeKamar == tipe;
 
       final cocokFasilitas =
-          fasilitas == 'Semua Fasilitas' || kos.fasilitas.contains(fasilitas);
+          fasilitas == 'Semua Fasilitas' ||
+          kos.fasilitas.contains(fasilitas);
 
       return cocokKeyword &&
           cocokLokasi &&
@@ -118,9 +123,8 @@ class _PencarianPageState extends State<PencarianPage> {
   Widget build(BuildContext context) {
     final hasil = hasilPencarian;
 
-    // --- UBAH JADI PENCARISCAFFOLD ---
     return PencariScaffold(
-      selectedIndex: 3, // Index 3 untuk menu Cari
+      selectedIndex: 3,
       backgroundColor: const Color(0xFFF5F8FD),
       body: SafeArea(
         child: Column(
@@ -137,13 +141,32 @@ class _PencarianPageState extends State<PencarianPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Pencarian Kos',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/pencari/dashboard',
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Pencarian Kos',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 5),
                   const Text(
