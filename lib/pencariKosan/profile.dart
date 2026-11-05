@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pencari_navigation_bar.dart'; 
 
 class ProfilPencariKosan extends StatefulWidget {
   const ProfilPencariKosan({super.key});
@@ -85,9 +86,10 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  
+    return PencariScaffold(
+      selectedIndex: 4, 
       backgroundColor: background,
-
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -394,35 +396,6 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
           ],
         ),
       ),
-
-      // Bottom Navigation
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 4,
-        backgroundColor: Colors.white,
-        indicatorColor: const Color(0xFFEAF3FF),
-        onDestinationSelected: (index) {
-          if (index != 4) {
-            tampilkanPesan('Halaman belum tersedia');
-          }
-        },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            label: 'Favorit',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.chat_bubble_outline),
-            label: 'Pesan',
-          ),
-          NavigationDestination(icon: Icon(Icons.search), label: 'Pencarian'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-      ),
-    );
+    ); // <-- Tutup bracket di sini aja, Navigation bar lama Radi dihapus
   }
 }
