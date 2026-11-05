@@ -30,13 +30,12 @@ class PencariNavigationBar extends StatelessWidget {
 
   const PencariNavigationBar({super.key, required this.selectedIndex});
 
-  // Rute ini disesuaikan dengan file kamu, Jojo, dan Radi
   static const _routes = [
-    '/pencari/dashboard', // Index 0: dashboard.dart
-    '/pencari/favorit',   // Index 1: favorit.dart
-    '/pencari/pesan',     // Index 2: (File pesan belum ada)
-    '/pencari/pencarian', // Index 3: pencarian.dart (Jojo)
-    '/pencari/profile',   // Index 4: profile.dart (Radi)
+    '/pencari/dashboard', 
+    '/pencari/favorit',   
+    '/pencari/pesan',     
+    '/pencari/pencarian', 
+    '/pencari/profile',   
   ];
 
   @override
@@ -44,10 +43,8 @@ class PencariNavigationBar extends StatelessWidget {
     return NavigationBar(
       selectedIndex: selectedIndex,
       onDestinationSelected: (index) {
-        // Biar nggak error kalau ngeklik tombol yang lagi aktif
         if (index == selectedIndex) return;
         
-        // Pengecualian sementara buat fitur Pesan karena filenya belum ada
         if (index == 2) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Fitur Pesan belum tersedia')),
@@ -55,7 +52,6 @@ class PencariNavigationBar extends StatelessWidget {
           return;
         }
 
-        // Pindah halaman sesuai rute
         Navigator.pushReplacementNamed(context, _routes[index]);
       },
       destinations: const [

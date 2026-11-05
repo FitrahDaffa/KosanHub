@@ -396,6 +396,6 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
           ],
         ),
       ),
-    ); // <-- Tutup bracket di sini aja, Navigation bar lama Radi dihapus
+    );
   }
 }
