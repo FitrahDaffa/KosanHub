@@ -83,7 +83,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
       ),
     );
   }
-
+// Navigation bar
   @override
   Widget build(BuildContext context) {
   
@@ -193,6 +193,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                                 ],
                               ),
                             ),
+                            // Tombol Edit Profil
                             IconButton(
                               onPressed: () =>
                                   tampilkanPesan('Edit profil dipilih'),
@@ -203,9 +204,9 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                             ),
                           ],
                         ),
-
+                      
                         const SizedBox(height: 20),
-
+                      // Kotak Statistik 
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
@@ -278,6 +279,7 @@ class _ProfilPencariKosanState extends State<ProfilPencariKosan> {
                           'Bantuan',
                           'FAQ dan panduan',
                         ),
+                        // Tombol Keluar
                         const Divider(height: 1, indent: 20, endIndent: 20),
                         InkWell(
                           onTap: () {
